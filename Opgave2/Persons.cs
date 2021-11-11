@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Opgave2
 {
-    class Persons
+    public class Persons
     {
         [Key]
         [Required]

@@ -11,7 +11,7 @@ namespace Opgave2
         [Key]
         public int locationId { get; set; }
 
-        public Municipality municipality { get; set; }
+        public Municipalities municipality { get; set; }
 
         public Addresses address { get; set; }
 

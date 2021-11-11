@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Opgave2
 {
-    class Societies
+    public class Societies
     {
         [Key]
         [MaxLength(8)]

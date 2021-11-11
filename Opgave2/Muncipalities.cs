@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Opgave2
 {
-    class Municipalities
+    public class Municipalities
     {
         [Key]
         public int zipCode { get; set; }

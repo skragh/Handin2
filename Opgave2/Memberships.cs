@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Opgave2
 {
-    class Memberships
+    public class Memberships
     {
         public int membershipId { get; set; }
         [Required]

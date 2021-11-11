@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Opgave2
 {
-    class RoomBookings
+    public class RoomBookings
     {
         public int roomBookingId { get; set; }
         [Required]

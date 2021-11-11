@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Opgave2
 {
-    class Properties
+   public class Properties
     {
         public int propertyId { get; set; }
         [Required]
