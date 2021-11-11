@@ -14,7 +14,7 @@ namespace Opgave2
         [Required]
         [MaxLength(100)]
         public string name { get; set; }
-        public List<Locations> locations { get; set; }
-        public List Societies { get; set; }
+        public ICollection<Locations> locations { get; set; }
+        public ICollection<Societies> societies { get; set; }
     }
 }
