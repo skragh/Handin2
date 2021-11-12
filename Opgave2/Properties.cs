@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Opgave2
 {
-   public class Properties
+    public class Properties
     {
         [Key]
         public int propertyId { get; set; }
@@ -18,5 +18,9 @@ namespace Opgave2
         [MaxLength(100)]
         public string description { get; set; }
 
+        public override string ToString()
+        {
+            return $"[Properties] - Id: {propertyId}, Location: {location.locationId}, Description: {description}";
+        }
     }
 }

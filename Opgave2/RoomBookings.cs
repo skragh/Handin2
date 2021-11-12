@@ -24,5 +24,9 @@ namespace Opgave2
         [MaxLength(100)]
         public string description { get; set; }
 
+        public override string ToString()
+        {
+            return $"[RoomBookings] - Id: {roomBookingId}, Society: {societie.cvr}, Timespan: {timespan.timespanId}, Description: {description}";
+        }
     }
 }

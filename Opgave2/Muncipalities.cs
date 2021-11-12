@@ -11,10 +11,18 @@ namespace Opgave2
     {
         [Key]
         public int zipCode { get; set; }
+
         [Required]
         [MaxLength(100)]
         public string name { get; set; }
+
         public ICollection<Locations> locations { get; set; }
+
         public ICollection<Societies> societies { get; set; }
+
+        public override string ToString()
+        {
+            return $"[Municipalities] - ZipCode: {zipCode}, Name: {name}";
+        }
     }
 }
