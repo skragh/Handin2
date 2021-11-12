@@ -18,5 +18,10 @@ namespace Opgave4
         public DateTime closingTime { get; set; }
 
         public Rooms room { get; set; }
+
+        public override string ToString()
+        {
+            return $"[Timespans] - Id: {timespanId}, OpeningTime: {openingTime.ToString()}, ClosingTime: {closingTime.ToString()}, Room: {room.roomId}";
+        }
     }
 }

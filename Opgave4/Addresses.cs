@@ -22,5 +22,10 @@ namespace Opgave4
         [MaxLength(4)]
         [MinLength(4)]
         public int postalCode { get; set; }
+
+        public override string ToString()
+        {
+            return $"[Addresses] - Id: {AddressId}, Street: {street}, Number: {number}, PostalCode: {postalCode}";
+        }
     }
 }

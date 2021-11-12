@@ -22,14 +22,20 @@ namespace Opgave4
         public string activity { get; set; }
 
         [Required]
-        public Addresses adress { get; set; }
+        public Addresses address { get; set; }
 
         [Required]
         public Municipalities municipality { get; set; }
 
-        [Required]
-        public KeyResponsible keyResponsible { get; set; }
+        public ICollection<Memberships> memberships { get; set; }
 
         public ICollection<RoomBookings> roomBookings { get; set; }
+
+        public KeyResponsible keyResponsible { get; set; }
+
+        public override string ToString()
+        {
+            return $"[Societies] - CVR: {cvr}, Name: {name}, Activity: {activity}, Address {address}, Municipality: {municipality.zipCode}";
+        }
     }
 }

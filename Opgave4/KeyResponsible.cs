@@ -8,6 +8,9 @@ namespace Opgave4
 {
     public class KeyResponsible
     {
+        [Key]
+        public int keyResponsibleId { get; set; }
+        
         public Persons person { get; set; }
 
         [MaxLength(8)]

@@ -8,6 +8,9 @@ namespace Opgave4
 {
     public class AccessKey
     {
+        [Key]
+        public int accessKeyId { get; set; }
+
         public Addresses keyAddress { get; set; }
 
         [MaxLength(8)]
