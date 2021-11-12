@@ -17,7 +17,11 @@ namespace Opgave4
 
         [MaxLength(255)]
         public string description { get; set; }
+        List<Rooms> rooms { get; set; } = new List<Rooms>();
 
-        public AccessKey accessKey { get; set; }
+        public override string ToString()
+        {
+            return $"[Locations] - Id: {locationId}, Municipality: {municipality}, Address: {address.ToString()}, Description: {description}";
+        }
     }
 }
