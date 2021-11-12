@@ -10,8 +10,9 @@ namespace Opgave2
     {
         [Key]
         public int roomId { get; set; }
-
+        [Required]
         public Locations location { get; set; }
+        public int locationId { get; set; }
 
         [MaxLength(100)]
         public string name { get; set; }

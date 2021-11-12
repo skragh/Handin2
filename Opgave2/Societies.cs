@@ -19,9 +19,10 @@ namespace Opgave2
         [MaxLength(100)]
         public string activity { get; set; }
         [Required]
-        public Addresses adress { get; set; }
+        public Addresses address { get; set; }
         [Required]
         public Municipalities municipality { get; set; }
+        public ICollection<Memberships> memberships { get; set; }
 
         public ICollection<RoomBookings> roomBookings { get; set; }
     }

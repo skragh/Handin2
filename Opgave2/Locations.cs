@@ -17,5 +17,6 @@ namespace Opgave2
 
         [MaxLength(255)]
         public string description { get; set; }
+        List<Rooms> rooms { get; set; } = new List<Rooms>();
     }
 }
