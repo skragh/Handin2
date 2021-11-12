@@ -23,11 +23,15 @@ namespace Opgave4
 
         [Required]
         public Addresses address { get; set; }
+
         [Required]
         public Municipalities municipality { get; set; }
+
         public ICollection<Memberships> memberships { get; set; }
 
         public ICollection<RoomBookings> roomBookings { get; set; }
+
+        public KeyResponsible keyResponsible { get; set; }
 
         public override string ToString()
         {

@@ -14,7 +14,9 @@ namespace Opgave4
             optionsBuilder.UseSqlite("DataSource=app.db;Cache=Shared");
         }
 
+        public DbSet<AccessKey> accessKeys { get; set; }
         public DbSet<Addresses> addresses { get; set; }
+        public DbSet<KeyResponsible> keyResponsibles { get; set; }
         public DbSet<Locations> locations { get; set; }
         public DbSet<Memberships> memberships { get; set; }
         public DbSet<Municipalities> municipalities { get; set; }

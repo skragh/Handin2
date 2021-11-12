@@ -18,11 +18,12 @@ namespace Opgave4
 
         public ICollection<Rooms> GetRoomsInMunicipality(int zipCode)
         {
-            return (ICollection<Rooms>)(from location in context.locations
-                                        where location.municipality.zipCode == zipCode
-                                        join room in context.rooms
-                                        on location.locationId equals room.location.locationId
-                                        select new { room }).ToList();
+            return (ICollection<Rooms>)
+                (from location in context.locations
+                 where location.municipality.zipCode == zipCode
+                 join room in context.rooms
+                 on location.locationId equals room.location.locationId
+                 select new { room }).ToList();
         }
 
         public ICollection<(Societies, Memberships, Addresses)> GetSocietiesByActivity(string activity)
@@ -52,5 +53,16 @@ namespace Opgave4
                  select new { room, location, member.person, booking.timespan }).ToList();
         }
 
+        public ICollection<(RoomBookings, AccessKey)> GetFutureBookingsWithAccessKey(int keyResponsibleId)
+        {
+            return (ICollection<(RoomBookings, AccessKey)>)
+                (from society in context.societies
+                 where society.keyResponsible.keyResponsibleId == keyResponsibleId
+                 join booking in context.roomBookings
+                 on society equals booking.societie
+                 join accessKey in context.accessKeys
+                 on booking.timespan.room.location.accessKey equals accessKey
+                 select new { booking, accessKey }).ToList();
+        }
     }
 }
