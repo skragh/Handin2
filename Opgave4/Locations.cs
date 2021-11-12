@@ -17,5 +17,7 @@ namespace Opgave4
 
         [MaxLength(255)]
         public string description { get; set; }
+
+        public AccessKey accessKey { get; set; }
     }
 }
