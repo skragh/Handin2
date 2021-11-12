@@ -9,13 +9,18 @@ namespace Opgave2
 {
     public class RoomBookings
     {
+        [Key]
         public int roomBookingId { get; set; }
+
         [Required]
         public Societies societie { get; set; }
+
         [Required]
         public Timespans timespan { get; set; }
+
         [Required]
         public ICollection<Properties> properties { get; set; }
+
         [MaxLength(100)]
         public string description { get; set; }
 

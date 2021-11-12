@@ -9,11 +9,15 @@ namespace Opgave2
 {
     public class Memberships
     {
+        [Key]
         public int membershipId { get; set; }
+
         [Required]
         public Societies society { get; set; }
+
         [Required]
         public Persons person { get; set; }
+
         public bool isChairman { get; set; }
     }
 }

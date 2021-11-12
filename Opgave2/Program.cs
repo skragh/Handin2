@@ -12,8 +12,10 @@ namespace Opgave2
 
             var test = context.addresses.Find(1);
 
-            Console.WriteLine($"{test.street}");
-
+            if (test != null)
+                Console.WriteLine($"{test.ToString()}");
+            else 
+                Console.WriteLine("Test is null");
         }
     }
 }

@@ -9,9 +9,12 @@ namespace Opgave2
 {
    public class Properties
     {
+        [Key]
         public int propertyId { get; set; }
+
         [Required]
         public Locations location { get; set; }
+
         [MaxLength(100)]
         public string description { get; set; }
 
