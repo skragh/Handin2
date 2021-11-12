@@ -83,9 +83,27 @@ namespace Opgave2
                     context.persons.Add(person9);
 
                     //Municipalities
-                    var municipality1 = new Municipalities { name = "Odder", zipCode = 8300 };
-                    var municipality2 = new Municipalities { name = "Aarhus C", zipCode = 8000 };
-                    var municipality3 = new Municipalities { name = "Skanderborg", zipCode = 8660 };
+                    var municipality1 = new Municipalities
+                    {
+                        name = "Odder",
+                        zipCode = 8300,
+                        locations = new List<Locations>(),
+                        societies = new List<Societies>()
+                    };
+                    var municipality2 = new Municipalities
+                    {
+                        name = "Aarhus C",
+                        zipCode = 8000,
+                        locations = new List<Locations>(),
+                        societies = new List<Societies>()
+                    };
+                    var municipality3 = new Municipalities
+                    {
+                        name = "Skanderborg",
+                        zipCode = 8660,
+                        locations = new List<Locations>(),
+                        societies = new List<Societies>()
+                    };
                     //    (8300, 'Odder'),
                     //    (8000, 'Aarhus C'),
                     //    (8660, 'Skanderborg');

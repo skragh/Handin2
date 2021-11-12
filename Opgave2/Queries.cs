@@ -18,11 +18,12 @@ namespace Opgave2
 
         public ICollection<Rooms> GetRoomsInMunicipality(int zipCode)
         {
-            return (ICollection<Rooms>)(from location in context.locations
-                                        where location.municipality.zipCode == zipCode
-                                        join room in context.rooms
-                                        on location.locationId equals room.location.locationId
-                                        select room).ToList();
+            return (ICollection<Rooms>)
+                (from location in context.locations
+                 where location.municipality.zipCode == zipCode
+                 join room in context.rooms
+                 on location.locationId equals room.location.locationId
+                 select room).ToList();
         }
 
         public ICollection<(Societies, Memberships, Addresses)> GetSocietiesByActivity(string activity)
