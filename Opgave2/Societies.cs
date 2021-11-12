@@ -31,7 +31,7 @@ namespace Opgave2
 
         public override string ToString()
         {
-            return $"[Societies] - CVR: {cvr}, Name: {name}, Activity: {activity}, Address {adress}, Municipality: {municipality.zipCode}";
+            return $"[Societies] - CVR: {cvr}, Name: {name}, Activity: {activity}, Address {address}, Municipality: {municipality.zipCode}";
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Opgave2
                  on society.cvr equals member.society.cvr
                  where member.isChairman
                  join address in context.addresses
-                 on society.adress equals address
+                 on society.address equals address
                  select new { society, member, address }).ToList();
         }
 
