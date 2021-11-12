@@ -17,5 +17,10 @@ namespace Opgave2
 
         [MaxLength(255)]
         public string description { get; set; }
+
+        public override string ToString()
+        {
+            return $"[Locations] - Id: {locationId}, Municipality: {municipality}, Address: {address.ToString()}, Description: {description}";
+        }
     }
 }

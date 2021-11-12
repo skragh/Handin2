@@ -13,10 +13,16 @@ namespace Opgave2
         [Required]
         [MaxLength(11)]
         public string cpr { get; set; }
+
         [Required]
         [MaxLength(100)]
         public string name { get; set; }
+
         [Required]
         public Addresses address { get; set; }
+
+        public override string ToString() {
+            return $"[Persons] - CPR: {cpr}, Name: {name}, Address: {address.AddressId}";
+        }
     }
 }

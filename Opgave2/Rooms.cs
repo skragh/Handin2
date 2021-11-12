@@ -19,5 +19,9 @@ namespace Opgave2
         public int capacity { get; set; }
 
         public ICollection<Timespans> timespans { get; set; }
+
+        public override string ToString() {
+            return $"[Rooms] - Id: {roomId}, Location: {location.locationId}, Name: {name}, Capacity: {capacity}";
+        }
     }
 }

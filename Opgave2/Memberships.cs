@@ -19,5 +19,10 @@ namespace Opgave2
         public Persons person { get; set; }
 
         public bool isChairman { get; set; }
+
+        public override string ToString()
+        {
+            return $"[Memberships] - Id: {membershipId}, Society: {society.cvr}, Person: {person.cpr}, isChairman: {isChairman}";
+        }
     }
 }

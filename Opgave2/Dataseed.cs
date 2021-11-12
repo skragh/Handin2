@@ -18,10 +18,12 @@ namespace Opgave2
                 if (address == null)
                 {
                     //addresses
-                    context.addresses.Add(new Addresses { AddressId = 0, number = 1, postalCode = 8000, street = "Finlandsgade" });
-                    context.addresses.Add(new Addresses { AddressId = 1, number = 5, postalCode = 8000, street = "Finlandsgade" });
-                    context.addresses.Add(new Addresses { AddressId= 2,number = 17, postalCode = 8200, street = "Paludanen" });
+                    context.addresses.Add(new Addresses { number = 1, postalCode = 8000, street = "Finlandsgade" });
+                    context.addresses.Add(new Addresses { number = 5, postalCode = 8000, street = "Finlandsgade" });
+                    context.addresses.Add(new Addresses { number = 17, postalCode = 8200, street = "Paludanen" });
                 }
+
+                context.SaveChanges();
             }
         }
     }
