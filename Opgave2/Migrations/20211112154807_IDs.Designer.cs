@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Opgave2;
 
 namespace Opgave2.Migrations
 {
     [DbContext(typeof(MuncipalityDbContext))]
-    partial class MuncipalityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211112154807_IDs")]
+    partial class IDs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,9 +163,6 @@ namespace Opgave2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("cvr")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("description")
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
@@ -172,7 +171,7 @@ namespace Opgave2.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("timespanId")
+                    b.Property<int?>("timespanId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("roomBookingId");
@@ -339,9 +338,7 @@ namespace Opgave2.Migrations
 
                     b.HasOne("Opgave2.Timespans", "timespan")
                         .WithMany()
-                        .HasForeignKey("timespanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("timespanId");
 
                     b.Navigation("societie");
 

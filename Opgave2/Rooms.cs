@@ -25,8 +25,7 @@ namespace Opgave2
 
         public override string ToString()
         {
-            return $"[Rooms] - Id: {roomId}, Location: {locationId}";
-            //", Name: {name}, Capacity: {capacity}";
+            return $"[Rooms] - Id: {roomId}, Location: {locationId}, Name: {name}, Capacity: {capacity}";
         }
     }
 }

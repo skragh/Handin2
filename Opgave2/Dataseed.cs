@@ -218,12 +218,12 @@ namespace Opgave2
 
                 //RoomBookings
                 List<RoomBookings> roomBookings = new List<RoomBookings>();
-                roomBookings.Add(new RoomBookings { societie = society1, properties = properties.GetRange(1, 1), description = "Pistolskydning -træning" });
-                roomBookings.Add(new RoomBookings { societie = society2, properties = properties.GetRange(2, 1), description = "Stafetløb" });
-                roomBookings.Add(new RoomBookings { societie = society3, properties = properties.GetRange(3, 1), description = "Omegnsturnering" });
-                roomBookings.Add(new RoomBookings { societie = society4, properties = properties.GetRange(4, 1), description = "Jiyu Kumite" });
-                roomBookings.Add(new RoomBookings { societie = society5, properties = properties.GetRange(5, 1), description = "Grov Pistol" });
-                roomBookings.Add(new RoomBookings { societie = society6, properties = properties.GetRange(6, 1), description = "Luftpistol Elitetræning" });
+                roomBookings.Add(new RoomBookings { societie = society1, properties = properties.GetRange(1, 1), description = "Pistolskydning -træning", timespan = timespans[0] });
+                roomBookings.Add(new RoomBookings { societie = society2, properties = properties.GetRange(2, 1), description = "Stafetløb", timespan = timespans[1] });
+                roomBookings.Add(new RoomBookings { societie = society3, properties = properties.GetRange(3, 1), description = "Omegnsturnering", timespan = timespans[2] });
+                roomBookings.Add(new RoomBookings { societie = society4, properties = properties.GetRange(4, 1), description = "Jiyu Kumite", timespan = timespans[3] });
+                roomBookings.Add(new RoomBookings { societie = society5, properties = properties.GetRange(5, 1), description = "Grov Pistol", timespan = timespans[4] });
+                roomBookings.Add(new RoomBookings { societie = society6, properties = properties.GetRange(6, 1), description = "Luftpistol Elitetræning", timespan = timespans[5] });
                 society1.roomBookings.Add(roomBookings[0]);
                 properties[1].roomBookings.Add(roomBookings[0]);
                 society2.roomBookings.Add(roomBookings[1]);

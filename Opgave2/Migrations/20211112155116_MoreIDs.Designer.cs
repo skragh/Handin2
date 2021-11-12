@@ -9,8 +9,8 @@ using Opgave2;
 namespace Opgave2.Migrations
 {
     [DbContext(typeof(MuncipalityDbContext))]
-    [Migration("20211112152939_Initial")]
-    partial class Initial
+    [Migration("20211112155116_MoreIDs")]
+    partial class MoreIDs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,7 +47,7 @@ namespace Opgave2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("addressId")
+                    b.Property<int>("addressId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("description")
@@ -55,6 +55,9 @@ namespace Opgave2.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("municipalityzipCode")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("zipCode")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("locationId");
@@ -71,6 +74,12 @@ namespace Opgave2.Migrations
                     b.Property<int>("membershipId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("cpr")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("cvr")
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("isChairman")
                         .HasColumnType("INTEGER");
@@ -154,6 +163,9 @@ namespace Opgave2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("cvr")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("description")
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
@@ -162,7 +174,7 @@ namespace Opgave2.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("timespanId")
+                    b.Property<int>("timespanId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("roomBookingId");
@@ -269,7 +281,9 @@ namespace Opgave2.Migrations
                 {
                     b.HasOne("Opgave2.Addresses", "address")
                         .WithMany()
-                        .HasForeignKey("addressId");
+                        .HasForeignKey("addressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Opgave2.Municipalities", "municipality")
                         .WithMany("locations")
@@ -327,7 +341,9 @@ namespace Opgave2.Migrations
 
                     b.HasOne("Opgave2.Timespans", "timespan")
                         .WithMany()
-                        .HasForeignKey("timespanId");
+                        .HasForeignKey("timespanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("societie");
 

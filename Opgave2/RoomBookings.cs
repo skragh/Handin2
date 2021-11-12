@@ -15,9 +15,11 @@ namespace Opgave2
 
         [Required]
         public Societies societie { get; set; }
+        public string cvr { get; set; }
 
         [Required]
         public Timespans timespan { get; set; }
+        public int timespanId { get; set; }
 
         [Required]
         public List<Properties> properties { get; set; } = new List<Properties>();

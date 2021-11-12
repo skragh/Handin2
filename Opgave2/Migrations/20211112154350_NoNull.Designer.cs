@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Opgave2;
 
 namespace Opgave2.Migrations
 {
     [DbContext(typeof(MuncipalityDbContext))]
-    partial class MuncipalityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211112154350_NoNull")]
+    partial class NoNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +47,7 @@ namespace Opgave2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("addressId")
+                    b.Property<int?>("addressId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("description")
@@ -53,9 +55,6 @@ namespace Opgave2.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("municipalityzipCode")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("zipCode")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("locationId");
@@ -72,12 +71,6 @@ namespace Opgave2.Migrations
                     b.Property<int>("membershipId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("cpr")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("cvr")
-                        .HasColumnType("TEXT");
 
                     b.Property<bool>("isChairman")
                         .HasColumnType("INTEGER");
@@ -161,9 +154,6 @@ namespace Opgave2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("cvr")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("description")
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
@@ -172,7 +162,7 @@ namespace Opgave2.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("timespanId")
+                    b.Property<int?>("timespanId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("roomBookingId");
@@ -279,9 +269,7 @@ namespace Opgave2.Migrations
                 {
                     b.HasOne("Opgave2.Addresses", "address")
                         .WithMany()
-                        .HasForeignKey("addressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("addressId");
 
                     b.HasOne("Opgave2.Municipalities", "municipality")
                         .WithMany("locations")
@@ -339,9 +327,7 @@ namespace Opgave2.Migrations
 
                     b.HasOne("Opgave2.Timespans", "timespan")
                         .WithMany()
-                        .HasForeignKey("timespanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("timespanId");
 
                     b.Navigation("societie");
 

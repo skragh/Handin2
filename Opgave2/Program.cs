@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 
 namespace Opgave2
@@ -7,6 +8,11 @@ namespace Opgave2
     {
         static void Main(string[] args)
         {
+            if (File.Exists("app.db"))
+            {
+                File.Delete("app.db");
+            }
+
             var context = new MuncipalityDbContext();
             Dataseed data = new Dataseed();
             data.SeedData();
@@ -20,9 +26,10 @@ namespace Opgave2
 
             var query = new Queries(context);
 
+            var zipCode = 8000;
             //var roomsInOdder = query.GetRoomsInMunicipality(8300);
             var roomsInOdder = from location in context.locations
-                               where location.municipality.zipCode == 8300
+                               where location.municipality.zipCode == zipCode
                                join room in context.rooms
                                on location.locationId equals room.location.locationId
                                select room;

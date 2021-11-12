@@ -15,15 +15,17 @@ namespace Opgave2
 
         [Required]
         public Societies society { get; set; }
+        public string cvr { get; set; }
 
         [Required]
         public Persons person { get; set; }
+        public string cpr { get; set; }
 
         public bool isChairman { get; set; }
 
         public override string ToString()
         {
-            return $"[Memberships] - Id: {membershipId}, Society: {society.cvr}, Person: {person.cpr}, isChairman: {isChairman}";
+            return $"[Memberships] - Id: {membershipId}, Society: {cvr}, Person: {cpr}, isChairman: {isChairman}";
         }
     }
 }
