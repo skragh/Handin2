@@ -52,7 +52,7 @@ namespace Opgave2.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("municipalityzipCode")
+                    b.Property<int>("municipalityzipCode")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("locationId");
@@ -74,10 +74,10 @@ namespace Opgave2.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("personcpr")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("societycvr")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("membershipId");
@@ -157,7 +157,6 @@ namespace Opgave2.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("societiecvr")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("timespanId")
@@ -209,7 +208,10 @@ namespace Opgave2.Migrations
                     b.Property<int>("addressId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("municipalityzipCode")
+                    b.Property<string>("municipalityzipCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("municipalityzipCode1")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("name")
@@ -221,7 +223,7 @@ namespace Opgave2.Migrations
 
                     b.HasIndex("addressId");
 
-                    b.HasIndex("municipalityzipCode");
+                    b.HasIndex("municipalityzipCode1");
 
                     b.ToTable("societies");
                 });
@@ -273,7 +275,9 @@ namespace Opgave2.Migrations
 
                     b.HasOne("Opgave2.Municipalities", "municipality")
                         .WithMany("locations")
-                        .HasForeignKey("municipalityzipCode");
+                        .HasForeignKey("municipalityzipCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("address");
 
@@ -284,7 +288,9 @@ namespace Opgave2.Migrations
                 {
                     b.HasOne("Opgave2.Persons", "person")
                         .WithMany()
-                        .HasForeignKey("personcpr");
+                        .HasForeignKey("personcpr")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Opgave2.Societies", "society")
                         .WithMany("memberships")
@@ -359,7 +365,7 @@ namespace Opgave2.Migrations
 
                     b.HasOne("Opgave2.Municipalities", "municipality")
                         .WithMany("societies")
-                        .HasForeignKey("municipalityzipCode")
+                        .HasForeignKey("municipalityzipCode1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

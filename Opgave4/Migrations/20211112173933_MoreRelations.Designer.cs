@@ -9,8 +9,8 @@ using Opgave4;
 namespace Opgave4.Migrations
 {
     [DbContext(typeof(MuncipalityDbContext))]
-    [Migration("20211112164114_Opgave4")]
-    partial class Opgave4
+    [Migration("20211112173933_MoreRelations")]
+    partial class MoreRelations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,6 +22,9 @@ namespace Opgave4.Migrations
                 {
                     b.Property<int>("accessKeyId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("addressId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("keyAddressaddressId")
@@ -101,7 +104,7 @@ namespace Opgave4.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("municipalityzipCode")
+                    b.Property<int>("municipalityzipCode")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("locationId");
@@ -208,7 +211,6 @@ namespace Opgave4.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("societiecvr")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("timespanId")
@@ -353,7 +355,9 @@ namespace Opgave4.Migrations
 
                     b.HasOne("Opgave4.Municipalities", "municipality")
                         .WithMany("locations")
-                        .HasForeignKey("municipalityzipCode");
+                        .HasForeignKey("municipalityzipCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("accessKey");
 

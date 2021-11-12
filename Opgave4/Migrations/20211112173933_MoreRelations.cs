@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Opgave4.Migrations
 {
-    public partial class Opgave4 : Migration
+    public partial class MoreRelations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,6 +42,7 @@ namespace Opgave4.Migrations
                     accessKeyId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     keyAddressaddressId = table.Column<int>(type: "INTEGER", nullable: true),
+                    addressId = table.Column<int>(type: "INTEGER", nullable: false),
                     pinCode = table.Column<string>(type: "TEXT", maxLength: 8, nullable: true)
                 },
                 constraints: table =>
@@ -80,7 +81,7 @@ namespace Opgave4.Migrations
                 {
                     locationId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    municipalityzipCode = table.Column<int>(type: "INTEGER", nullable: true),
+                    municipalityzipCode = table.Column<int>(type: "INTEGER", nullable: false),
                     addressId = table.Column<int>(type: "INTEGER", nullable: false),
                     accessKeyId = table.Column<int>(type: "INTEGER", nullable: false),
                     description = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
@@ -105,7 +106,7 @@ namespace Opgave4.Migrations
                         column: x => x.municipalityzipCode,
                         principalTable: "municipalities",
                         principalColumn: "zipCode",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -258,7 +259,7 @@ namespace Opgave4.Migrations
                 {
                     roomBookingId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    societiecvr = table.Column<string>(type: "TEXT", nullable: false),
+                    societiecvr = table.Column<string>(type: "TEXT", nullable: true),
                     timespanId = table.Column<int>(type: "INTEGER", nullable: false),
                     description = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true)
                 },

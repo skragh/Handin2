@@ -13,6 +13,7 @@ namespace Opgave2
         public int locationId { get; set; }
 
         public Municipalities municipality { get; set; }
+        public int municipalityzipCode { get; set; }
 
         public Addresses address { get; set; }
         public int addressId { get; set; }
@@ -26,7 +27,7 @@ namespace Opgave2
 
         public override string ToString()
         {
-            return $"[Locations] - Id: {locationId}, Municipality: {municipality.zipCode}, Address: {addressId}, Description: {description}";
+            return $"[Locations] - Id: {locationId}, Municipality: {municipalityzipCode}, Address: {addressId}, Description: {description}";
         }
     }
 }

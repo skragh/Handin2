@@ -20,7 +20,6 @@ namespace Opgave4
         [MaxLength(100)]
         public string description { get; set; }
 
-        //[ForeignKey("RoomBookings")]
         public List<RoomBookings> roomBookings { get; } = new List<RoomBookings>();
 
         public override string ToString()

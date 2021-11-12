@@ -12,8 +12,14 @@ namespace Opgave4
         public int accessKeyId { get; set; }
 
         public Addresses keyAddress { get; set; }
+        public int addressId { get; set; }
 
         [MaxLength(8)]
         public string pinCode { get; set; }
+
+        public override string ToString()
+        {
+            return $"[AccessKey] - Id: {accessKeyId}, Address: {addressId}, Pin: {pinCode}";
+        }
     }
 }

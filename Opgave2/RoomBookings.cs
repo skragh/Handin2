@@ -15,6 +15,7 @@ namespace Opgave2
 
         [Required]
         public Societies societie { get; set; }
+        public string societiecvr { get; set; }
 
         [Required]
         public Timespans timespan { get; set; }
@@ -28,7 +29,7 @@ namespace Opgave2
 
         public override string ToString()
         {
-            return $"[RoomBookings] - Id: {roomBookingId}, Society: {societie.cvr}, Timespan: {timespanId}, Description: {description}";
+            return $"[RoomBookings] - Id: {roomBookingId}, Society: {societiecvr}, Timespan: {timespanId}, Description: {description}";
         }
     }
 }

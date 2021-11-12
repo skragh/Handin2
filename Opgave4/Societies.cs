@@ -31,6 +31,7 @@ namespace Opgave4
 
         [Required]
         public Municipalities municipality { get; set; }
+        public int municipalityzipCode { get; set; }
 
         public List<Memberships> memberships { get; } = new List<Memberships>();
 
@@ -38,7 +39,7 @@ namespace Opgave4
 
         public override string ToString()
         {
-            return $"[Societies] - CVR: {cvr}, Name: {name}, Activity: {activity}, Address {address}, Municipality: {municipality.zipCode}";
+            return $"[Societies] - CVR: {cvr}, Name: {name}, Activity: {activity}, Address {address}, Municipality: {municipalityzipCode}";
         }
     }
 }

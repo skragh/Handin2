@@ -22,6 +22,9 @@ namespace Opgave4.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("addressId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("keyAddressaddressId")
                         .HasColumnType("INTEGER");
 
@@ -99,7 +102,7 @@ namespace Opgave4.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("municipalityzipCode")
+                    b.Property<int>("municipalityzipCode")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("locationId");
@@ -206,7 +209,6 @@ namespace Opgave4.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("societiecvr")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("timespanId")
@@ -351,7 +353,9 @@ namespace Opgave4.Migrations
 
                     b.HasOne("Opgave4.Municipalities", "municipality")
                         .WithMany("locations")
-                        .HasForeignKey("municipalityzipCode");
+                        .HasForeignKey("municipalityzipCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("accessKey");
 
