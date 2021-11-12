@@ -14,7 +14,7 @@ namespace Opgave2
             {
                 context.Database.EnsureCreated();
 
-                var address = context.addresses.FirstOrDefault(a => a.AddressId == 1);
+                var address = context.addresses.FirstOrDefault(a => a.addressId == 1);
                 if (address == null)
                 {
                     //addresses
@@ -50,6 +50,12 @@ namespace Opgave2
                     context.addresses.Add(address10);
                     context.addresses.Add(address11);
                     context.addresses.Add(address12);
+                    context.addresses.Add(address13);
+                    context.addresses.Add(address14);
+                    context.addresses.Add(address15);
+                    context.addresses.Add(address16);
+                    context.addresses.Add(address17);
+                    context.addresses.Add(address18);
 
 
                     //Persons
@@ -154,12 +160,106 @@ namespace Opgave2
                     rooms.Add(new Rooms { capacity = 30, name = "15 meter skydebane i Skytternes Hus", location = locations[3] });
                     rooms.Add(new Rooms { capacity = 20, name = "10 meter skydebane i Skytterners hus", location = locations[3] });
                     rooms.Add(new Rooms { capacity = 500, name = "The GNU altar", location = locations[4] });
+                    locations[0].rooms.Add(rooms[0]);
+                    locations[0].rooms.Add(rooms[1]);
+                    locations[1].rooms.Add(rooms[2]);
+                    locations[1].rooms.Add(rooms[3]);
+                    locations[2].rooms.Add(rooms[4]);
+                    locations[3].rooms.Add(rooms[5]);
+                    locations[3].rooms.Add(rooms[6]);
+                    locations[4].rooms.Add(rooms[7]);
 
-                    
-                    //    (4, '15 meter skydebane i Skytternes hus', 30),
-                    //    (4, '10 meter skydebane i Skytternes hus', 20),
-                    //    (5, 'The GNU Alter', 500);
+                    //
+                    List<Properties> properties = new List<Properties>();
+                    properties.Add(new Properties { description = "Omklædning 7", location = locations[0] });
+                    properties.Add(new Properties { description = "Stopur", location = locations[0] });
+                    properties.Add(new Properties { description = "Toilet ved Hovedindgangen", location = locations[1] });
+                    properties.Add(new Properties { description = "Omklædning", location = locations[2] });
+                    properties.Add(new Properties { description = "Toilet på 1. sal", location = locations[2] });
+                    properties.Add(new Properties { description = "Banekikkerter", location = locations[3] });
+                    properties.Add(new Properties { description = "Kaffemaskine", location = locations[3] });
+                    properties.Add(new Properties { description = "Thinkpad x60 with GNU+Linux GUIX", location = locations[4] });
+                    locations[0].properties.Add(properties[0]);
+                    locations[0].properties.Add(properties[1]);
+                    locations[1].properties.Add(properties[2]);
+                    locations[2].properties.Add(properties[3]);
+                    locations[2].properties.Add(properties[4]);
+                    locations[3].properties.Add(properties[5]);
+                    locations[3].properties.Add(properties[6]);
+                    locations[4].properties.Add(properties[7]);
 
+                    //Timespans
+                    List<Timespans> timespans = new List<Timespans>();
+                    timespans.Add(new Timespans { room = rooms[0], openingTime = (new DateTime(2021, 09, 30, 07, 00, 00)), closingTime = (new DateTime(2021, 09, 30, 10, 00, 00)) });
+                    timespans.Add(new Timespans { room = rooms[1], openingTime = (new DateTime(2021, 10, 02, 09, 00, 00)), closingTime = (new DateTime(2021, 02, 10, 12, 00, 00)) });
+                    timespans.Add(new Timespans { room = rooms[2], openingTime = (new DateTime(2021, 10, 05, 07, 00, 00)), closingTime = (new DateTime(2021, 10, 05, 10, 00, 00)) });
+                    timespans.Add(new Timespans { room = rooms[3], openingTime = (new DateTime(2021, 10, 07, 06, 00, 00)), closingTime = (new DateTime(2021, 10, 07, 7, 30, 00)) });
+                    timespans.Add(new Timespans { room = rooms[4], openingTime = (new DateTime(2021, 10, 05, 06, 00, 00)), closingTime = (new DateTime(2021, 10, 05, 08, 00, 00)) });
+                    timespans.Add(new Timespans { room = rooms[5], openingTime = (new DateTime(2021, 10, 06, 16, 30, 00)), closingTime = (new DateTime(2021, 10, 06, 22, 00, 00)) });
+                    timespans.Add(new Timespans { room = rooms[6], openingTime = (new DateTime(2021, 10, 08, 17, 00, 00)), closingTime = (new DateTime(2021, 10, 08, 19, 00, 00)) });
+                    timespans.Add(new Timespans { room = rooms[7], openingTime = (new DateTime(2021, 10, 10, 09, 00, 00)), closingTime = (new DateTime(2021, 10, 10, 10, 00, 00)) });
+                    rooms[0].timespans.Add(timespans[0]);
+                    rooms[1].timespans.Add(timespans[1]);
+                    rooms[2].timespans.Add(timespans[2]);
+                    rooms[3].timespans.Add(timespans[3]);
+                    rooms[4].timespans.Add(timespans[4]);
+                    rooms[5].timespans.Add(timespans[5]);
+                    rooms[6].timespans.Add(timespans[6]);
+                    rooms[7].timespans.Add(timespans[7]);
+
+                    //RoomBookings
+                    List<RoomBookings> roomBookings = new List<RoomBookings>();
+                    roomBookings.Add(new RoomBookings { societie = society1, properties = (ICollection<Properties>)properties[1], description = "Pistolskydning -træning" });
+                    roomBookings.Add(new RoomBookings { societie = society2, properties = (ICollection<Properties>)properties[2], description = "Stafetløb" });
+                    roomBookings.Add(new RoomBookings { societie = society3, properties = (ICollection<Properties>)properties[3], description = "Omegnsturnering" });
+                    roomBookings.Add(new RoomBookings { societie = society4, properties = (ICollection<Properties>)properties[4], description = "Jiyu Kumite" });
+                    roomBookings.Add(new RoomBookings { societie = society5, properties = (ICollection<Properties>)properties[5], description = "Grov Pistol" });
+                    roomBookings.Add(new RoomBookings { societie = society6, properties = (ICollection<Properties>)properties[6], description = "Luftpistol Elitetræning" });
+                    society1.roomBookings.Add(roomBookings[0]);
+                    properties[1].roomBookings.Add(roomBookings[0]);
+                    society2.roomBookings.Add(roomBookings[1]);
+                    properties[2].roomBookings.Add(roomBookings[1]);
+                    society3.roomBookings.Add(roomBookings[2]);
+                    properties[3].roomBookings.Add(roomBookings[2]);
+                    society4.roomBookings.Add(roomBookings[3]);
+                    properties[4].roomBookings.Add(roomBookings[3]);
+                    society5.roomBookings.Add(roomBookings[4]);
+                    properties[5].roomBookings.Add(roomBookings[4]);
+                    society6.roomBookings.Add(roomBookings[5]);
+                    properties[6].roomBookings.Add(roomBookings[5]);
+
+                    context.municipalities.Add(municipality1);
+                    context.municipalities.Add(municipality2);
+                    context.municipalities.Add(municipality3);
+
+                    context.societies.Add(society1);
+                    context.societies.Add(society2);
+                    context.societies.Add(society3);
+                    context.societies.Add(society4);
+                    context.societies.Add(society5);
+                    context.societies.Add(society6);
+                    context.societies.Add(society7);
+
+                    foreach (var item in memberships)
+                    {
+                        context.memberships.Add(item);
+                    }
+                    foreach (var item in properties)
+                    {
+                        context.properties.Add(item);
+                    }
+                    foreach (var item in rooms)
+                    {
+                        context.rooms.Add(item);
+                    }
+                    foreach (var item in timespans)
+                    {
+                        context.timespans.Add(item);
+                    }
+                    foreach (var item in roomBookings)
+                    {
+                        context.roomBookings.Add(item);
+                    }
                 }
                 context.SaveChanges();
             }
@@ -168,41 +268,3 @@ namespace Opgave2
 }
 
 
-//INSERT INTO dbo.Rooms
-//VALUES
-
-//GO
-
-//INSERT INTO dbo.Properties
-//VALUES
-//    ('Omklædning 7', 1),
-//    ('Stopur', 1),
-//    ('Toilet ved Hovedindgangen', 2),
-//    ('Omklædning B', 3),
-//    ('Toilet på 1. sal', 3),
-//    ('Banekikkerter', 4),
-//    ('Kaffemaskine', 4),
-//    ('ThinkPad X60 with GNU+Linux Guix', 5);
-//GO
-
-//INSERT INTO dbo.Timespans
-//VALUES
-//    (CONVERT(datetime, '30-09-21 07:00:00 PM', 5), CONVERT(datetime, '30-09-21 10:00:00 PM', 5), 1),
-//    (CONVERT(datetime, '02-10-21 09:00:00 AM', 5), CONVERT(datetime, '02-10-21 12:00:00 AM', 5), 2),
-//    (CONVERT(datetime, '05-10-21 07:00:00 PM', 5), CONVERT(datetime, '05-10-21 10:00:00 PM', 5), 3),
-//    (CONVERT(datetime, '07-10-21 06:00:00 PM', 5), CONVERT(datetime, '07-10-21 07:30:00 PM', 5), 4),
-//    (CONVERT(datetime, '05-10-21 06:00:00 PM', 5), CONVERT(datetime, '05-10-21 08:00:00 PM', 5), 5),
-//    (CONVERT(datetime, '06-10-21 04:30:00 PM', 5), CONVERT(datetime, '06-10-21 10:00:00 PM', 5), 6),
-//    (CONVERT(datetime, '08-10-21 05:00:00 PM', 5), CONVERT(datetime, '08-10-21 07:00:00 PM', 5), 7),
-//    (CONVERT(datetime, '10-10-21 09:00:00 AM', 5), CONVERT(datetime, '10-10-21 10:00:00 AM', 5), 8);
-//GO
-
-//INSERT INTO dbo.RoomBookings
-//VALUES
-//    ('86732412', 2, 'Pistolskydning - træning'),
-//    ('73457219', 3, 'Staffetløb'),
-//    ('87345851', 4, 'Riffelskydning - Omegnsturnering'),
-//    ('94652326', 5, 'Jiyu Kumite'),
-//    ('85234124', 6, 'Grovpistol - træning'),
-//    ('83623658', 7, 'Luftpistol - elitetræning');
-//GO

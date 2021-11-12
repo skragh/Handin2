@@ -23,6 +23,7 @@ namespace Opgave2
 
         [Required]
         public Addresses address { get; set; }
+        public int addressId { get; set; }
         [Required]
         public Municipalities municipality { get; set; }
         public ICollection<Memberships> memberships { get; set; }

@@ -9,7 +9,7 @@ namespace Opgave2
     public class Addresses
     {
         [Key]
-        public int AddressId { get; set; }
+        public int addressId { get; set; }
 
         [Required]
         [MaxLength(100)]
@@ -25,7 +25,7 @@ namespace Opgave2
 
         public override string ToString()
         {
-            return $"[Addresses] - Id: {AddressId}, Street: {street}, Number: {number}, PostalCode: {postalCode}";
+            return $"[Addresses] - Id: {addressId}, Street: {street}, Number: {number}, PostalCode: {postalCode}";
         }
     }
 }

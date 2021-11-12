@@ -22,7 +22,7 @@ namespace Opgave2
                                         where location.municipality.zipCode == zipCode
                                         join room in context.rooms
                                         on location.locationId equals room.location.locationId
-                                        select new { room }).ToList();
+                                        select room).ToList();
         }
 
         public ICollection<(Societies, Memberships, Addresses)> GetSocietiesByActivity(string activity)
