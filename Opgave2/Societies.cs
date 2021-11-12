@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +25,13 @@ namespace Opgave2
         [Required]
         public Addresses address { get; set; }
         public int addressId { get; set; }
+
         [Required]
         public Municipalities municipality { get; set; }
-        public ICollection<Memberships> memberships { get; set; }
 
-        public ICollection<RoomBookings> roomBookings { get; set; }
+        public List<Memberships> memberships { get; } = new List<Memberships>();
+
+        public List<RoomBookings> roomBookings { get; } = new List<RoomBookings>();
 
         public override string ToString()
         {

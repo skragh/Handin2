@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace Opgave2
         public Timespans timespan { get; set; }
 
         [Required]
-        public ICollection<Properties> properties { get; set; }
+        public List<Properties> properties { get; set; } = new List<Properties>();
 
         [MaxLength(100)]
         public string description { get; set; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Opgave2
 {
@@ -17,6 +18,7 @@ namespace Opgave2
         [DataType(DataType.DateTime)]
         public DateTime closingTime { get; set; }
 
+        //[ForeignKey("Rooms")]
         public Rooms room { get; set; }
 
         public override string ToString()

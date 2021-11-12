@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,8 @@ namespace Opgave2
         [MaxLength(100)]
         public string description { get; set; }
 
-        public ICollection<RoomBookings> roomBookings { get; set; }
+        //[ForeignKey("RoomBookings")]
+        public List<RoomBookings> roomBookings { get; } = new List<RoomBookings>();
 
         public override string ToString()
         {

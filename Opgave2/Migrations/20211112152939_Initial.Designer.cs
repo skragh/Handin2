@@ -9,7 +9,7 @@ using Opgave2;
 namespace Opgave2.Migrations
 {
     [DbContext(typeof(MuncipalityDbContext))]
-    [Migration("20211112115532_Initial")]
+    [Migration("20211112152939_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

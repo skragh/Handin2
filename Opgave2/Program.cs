@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Opgave2
 {
@@ -19,15 +20,22 @@ namespace Opgave2
 
             var query = new Queries(context);
 
-            var roomsInOdder = query.GetRoomsInMunicipality(8300);
+            //var roomsInOdder = query.GetRoomsInMunicipality(8300);
+            var roomsInOdder = from location in context.locations
+                               where location.municipality.zipCode == 8300
+                               join room in context.rooms
+                               on location.locationId equals room.location.locationId
+                               select room;
             if (roomsInOdder != null)
                 foreach (var room in roomsInOdder)
                     Console.WriteLine($"{room}");
 
+            /*
             var allSocieties = query.GetSocietiesByActivity("Computing");
             if (allSocieties != null)
                 foreach (var (society, member, address) in allSocieties)
                     Console.WriteLine($"{society}, {member.person}, {address}");
+                    */
         }
     }
 }
