@@ -13,10 +13,12 @@ namespace Opgave4
         public int locationId { get; set; }
 
         public Municipalities municipality { get; set; }
-        public int zipCode { get; set; }
 
         public Addresses address { get; set; }
         public int addressId { get; set; }
+
+        public AccessKey accessKey { get; set; }
+        public int accessKeyId { get; set; }
 
         [MaxLength(255)]
         public string description { get; set; }
@@ -27,7 +29,7 @@ namespace Opgave4
 
         public override string ToString()
         {
-            return $"[Locations] - Id: {locationId}, Municipality: {zipCode}, Address: {addressId}, Description: {description}";
+            return $"[Locations] - Id: {locationId}, Municipality: {municipality.zipCode}, Address: {addressId}, Description: {description}";
         }
     }
 }

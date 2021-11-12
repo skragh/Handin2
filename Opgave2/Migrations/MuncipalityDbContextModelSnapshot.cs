@@ -55,9 +55,6 @@ namespace Opgave2.Migrations
                     b.Property<int?>("municipalityzipCode")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("zipCode")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("locationId");
 
                     b.HasIndex("addressId");
@@ -72,12 +69,6 @@ namespace Opgave2.Migrations
                     b.Property<int>("membershipId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("cpr")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("cvr")
-                        .HasColumnType("TEXT");
 
                     b.Property<bool>("isChairman")
                         .HasColumnType("INTEGER");
@@ -161,9 +152,6 @@ namespace Opgave2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("cvr")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("description")
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
@@ -228,9 +216,6 @@ namespace Opgave2.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("zipCode")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("cvr");
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Opgave4.Migrations
 {
-    public partial class MoreIDs : Migration
+    public partial class Opgave4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,6 +36,26 @@ namespace Opgave4.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "accessKeys",
+                columns: table => new
+                {
+                    accessKeyId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    keyAddressaddressId = table.Column<int>(type: "INTEGER", nullable: true),
+                    pinCode = table.Column<string>(type: "TEXT", maxLength: 8, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_accessKeys", x => x.accessKeyId);
+                    table.ForeignKey(
+                        name: "FK_accessKeys_addresses_keyAddressaddressId",
+                        column: x => x.keyAddressaddressId,
+                        principalTable: "addresses",
+                        principalColumn: "addressId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "persons",
                 columns: table => new
                 {
@@ -61,13 +81,19 @@ namespace Opgave4.Migrations
                     locationId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     municipalityzipCode = table.Column<int>(type: "INTEGER", nullable: true),
-                    zipCode = table.Column<int>(type: "INTEGER", nullable: false),
                     addressId = table.Column<int>(type: "INTEGER", nullable: false),
+                    accessKeyId = table.Column<int>(type: "INTEGER", nullable: false),
                     description = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_locations", x => x.locationId);
+                    table.ForeignKey(
+                        name: "FK_locations_accessKeys_accessKeyId",
+                        column: x => x.accessKeyId,
+                        principalTable: "accessKeys",
+                        principalColumn: "accessKeyId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_locations_addresses_addressId",
                         column: x => x.addressId,
@@ -83,31 +109,24 @@ namespace Opgave4.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "societies",
+                name: "keyResponsibles",
                 columns: table => new
                 {
-                    cvr = table.Column<string>(type: "TEXT", maxLength: 8, nullable: false),
-                    name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    activity = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    addressId = table.Column<int>(type: "INTEGER", nullable: false),
-                    municipalityzipCode = table.Column<int>(type: "INTEGER", nullable: false),
-                    zipCode = table.Column<int>(type: "INTEGER", nullable: false)
+                    keyResponsibleId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    personcpr = table.Column<string>(type: "TEXT", nullable: true),
+                    phone = table.Column<string>(type: "TEXT", maxLength: 8, nullable: true),
+                    licenseNumber = table.Column<string>(type: "TEXT", maxLength: 8, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_societies", x => x.cvr);
+                    table.PrimaryKey("PK_keyResponsibles", x => x.keyResponsibleId);
                     table.ForeignKey(
-                        name: "FK_societies_addresses_addressId",
-                        column: x => x.addressId,
-                        principalTable: "addresses",
-                        principalColumn: "addressId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_societies_municipalities_municipalityzipCode",
-                        column: x => x.municipalityzipCode,
-                        principalTable: "municipalities",
-                        principalColumn: "zipCode",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_keyResponsibles_persons_personcpr",
+                        column: x => x.personcpr,
+                        principalTable: "persons",
+                        principalColumn: "cpr",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,31 +171,36 @@ namespace Opgave4.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "memberships",
+                name: "societies",
                 columns: table => new
                 {
-                    membershipId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    societycvr = table.Column<string>(type: "TEXT", nullable: false),
-                    cvr = table.Column<string>(type: "TEXT", nullable: true),
-                    personcpr = table.Column<string>(type: "TEXT", nullable: true),
-                    cpr = table.Column<string>(type: "TEXT", nullable: true),
-                    isChairman = table.Column<bool>(type: "INTEGER", nullable: false)
+                    cvr = table.Column<string>(type: "TEXT", maxLength: 8, nullable: false),
+                    name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    activity = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    addressId = table.Column<int>(type: "INTEGER", nullable: false),
+                    keyResponsibleId = table.Column<int>(type: "INTEGER", nullable: false),
+                    municipalityzipCode = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_memberships", x => x.membershipId);
+                    table.PrimaryKey("PK_societies", x => x.cvr);
                     table.ForeignKey(
-                        name: "FK_memberships_persons_personcpr",
-                        column: x => x.personcpr,
-                        principalTable: "persons",
-                        principalColumn: "cpr",
-                        onDelete: ReferentialAction.Restrict);
+                        name: "FK_societies_addresses_addressId",
+                        column: x => x.addressId,
+                        principalTable: "addresses",
+                        principalColumn: "addressId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_memberships_societies_societycvr",
-                        column: x => x.societycvr,
-                        principalTable: "societies",
-                        principalColumn: "cvr",
+                        name: "FK_societies_keyResponsibles_keyResponsibleId",
+                        column: x => x.keyResponsibleId,
+                        principalTable: "keyResponsibles",
+                        principalColumn: "keyResponsibleId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_societies_municipalities_municipalityzipCode",
+                        column: x => x.municipalityzipCode,
+                        principalTable: "municipalities",
+                        principalColumn: "zipCode",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -202,13 +226,39 @@ namespace Opgave4.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "memberships",
+                columns: table => new
+                {
+                    membershipId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    societycvr = table.Column<string>(type: "TEXT", nullable: false),
+                    personcpr = table.Column<string>(type: "TEXT", nullable: true),
+                    isChairman = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_memberships", x => x.membershipId);
+                    table.ForeignKey(
+                        name: "FK_memberships_persons_personcpr",
+                        column: x => x.personcpr,
+                        principalTable: "persons",
+                        principalColumn: "cpr",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_memberships_societies_societycvr",
+                        column: x => x.societycvr,
+                        principalTable: "societies",
+                        principalColumn: "cvr",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "roomBookings",
                 columns: table => new
                 {
                     roomBookingId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     societiecvr = table.Column<string>(type: "TEXT", nullable: false),
-                    cvr = table.Column<string>(type: "TEXT", nullable: true),
                     timespanId = table.Column<int>(type: "INTEGER", nullable: false),
                     description = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true)
                 },
@@ -252,6 +302,21 @@ namespace Opgave4.Migrations
                         principalColumn: "roomBookingId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_accessKeys_keyAddressaddressId",
+                table: "accessKeys",
+                column: "keyAddressaddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_keyResponsibles_personcpr",
+                table: "keyResponsibles",
+                column: "personcpr");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_locations_accessKeyId",
+                table: "locations",
+                column: "accessKeyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_locations_addressId",
@@ -309,6 +374,11 @@ namespace Opgave4.Migrations
                 column: "addressId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_societies_keyResponsibleId",
+                table: "societies",
+                column: "keyResponsibleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_societies_municipalityzipCode",
                 table: "societies",
                 column: "municipalityzipCode");
@@ -328,9 +398,6 @@ namespace Opgave4.Migrations
                 name: "PropertiesRoomBookings");
 
             migrationBuilder.DropTable(
-                name: "persons");
-
-            migrationBuilder.DropTable(
                 name: "properties");
 
             migrationBuilder.DropTable(
@@ -343,16 +410,25 @@ namespace Opgave4.Migrations
                 name: "timespans");
 
             migrationBuilder.DropTable(
+                name: "keyResponsibles");
+
+            migrationBuilder.DropTable(
                 name: "rooms");
+
+            migrationBuilder.DropTable(
+                name: "persons");
 
             migrationBuilder.DropTable(
                 name: "locations");
 
             migrationBuilder.DropTable(
-                name: "addresses");
+                name: "accessKeys");
 
             migrationBuilder.DropTable(
                 name: "municipalities");
+
+            migrationBuilder.DropTable(
+                name: "addresses");
         }
     }
 }

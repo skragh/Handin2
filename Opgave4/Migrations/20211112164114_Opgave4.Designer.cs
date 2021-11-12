@@ -9,14 +9,34 @@ using Opgave4;
 namespace Opgave4.Migrations
 {
     [DbContext(typeof(MuncipalityDbContext))]
-    [Migration("20211112160359_MoreIDs")]
-    partial class MoreIDs
+    [Migration("20211112164114_Opgave4")]
+    partial class Opgave4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.12");
+
+            modelBuilder.Entity("Opgave4.AccessKey", b =>
+                {
+                    b.Property<int>("accessKeyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("keyAddressaddressId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("pinCode")
+                        .HasMaxLength(8)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("accessKeyId");
+
+                    b.HasIndex("keyAddressaddressId");
+
+                    b.ToTable("accessKeys");
+                });
 
             modelBuilder.Entity("Opgave4.Addresses", b =>
                 {
@@ -41,10 +61,37 @@ namespace Opgave4.Migrations
                     b.ToTable("addresses");
                 });
 
+            modelBuilder.Entity("Opgave4.KeyResponsible", b =>
+                {
+                    b.Property<int>("keyResponsibleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("licenseNumber")
+                        .HasMaxLength(8)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("personcpr")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("phone")
+                        .HasMaxLength(8)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("keyResponsibleId");
+
+                    b.HasIndex("personcpr");
+
+                    b.ToTable("keyResponsibles");
+                });
+
             modelBuilder.Entity("Opgave4.Locations", b =>
                 {
                     b.Property<int>("locationId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("accessKeyId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("addressId")
@@ -57,10 +104,9 @@ namespace Opgave4.Migrations
                     b.Property<int?>("municipalityzipCode")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("zipCode")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("locationId");
+
+                    b.HasIndex("accessKeyId");
 
                     b.HasIndex("addressId");
 
@@ -74,12 +120,6 @@ namespace Opgave4.Migrations
                     b.Property<int>("membershipId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("cpr")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("cvr")
-                        .HasColumnType("TEXT");
 
                     b.Property<bool>("isChairman")
                         .HasColumnType("INTEGER");
@@ -163,9 +203,6 @@ namespace Opgave4.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("cvr")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("description")
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
@@ -223,6 +260,9 @@ namespace Opgave4.Migrations
                     b.Property<int>("addressId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("keyResponsibleId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("municipalityzipCode")
                         .HasColumnType("INTEGER");
 
@@ -231,12 +271,11 @@ namespace Opgave4.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("zipCode")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("cvr");
 
                     b.HasIndex("addressId");
+
+                    b.HasIndex("keyResponsibleId");
 
                     b.HasIndex("municipalityzipCode");
 
@@ -280,8 +319,32 @@ namespace Opgave4.Migrations
                     b.ToTable("PropertiesRoomBookings");
                 });
 
+            modelBuilder.Entity("Opgave4.AccessKey", b =>
+                {
+                    b.HasOne("Opgave4.Addresses", "keyAddress")
+                        .WithMany()
+                        .HasForeignKey("keyAddressaddressId");
+
+                    b.Navigation("keyAddress");
+                });
+
+            modelBuilder.Entity("Opgave4.KeyResponsible", b =>
+                {
+                    b.HasOne("Opgave4.Persons", "person")
+                        .WithMany()
+                        .HasForeignKey("personcpr");
+
+                    b.Navigation("person");
+                });
+
             modelBuilder.Entity("Opgave4.Locations", b =>
                 {
+                    b.HasOne("Opgave4.AccessKey", "accessKey")
+                        .WithMany()
+                        .HasForeignKey("accessKeyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Opgave4.Addresses", "address")
                         .WithMany()
                         .HasForeignKey("addressId")
@@ -291,6 +354,8 @@ namespace Opgave4.Migrations
                     b.HasOne("Opgave4.Municipalities", "municipality")
                         .WithMany("locations")
                         .HasForeignKey("municipalityzipCode");
+
+                    b.Navigation("accessKey");
 
                     b.Navigation("address");
 
@@ -374,6 +439,12 @@ namespace Opgave4.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Opgave4.KeyResponsible", "keyResponsible")
+                        .WithMany()
+                        .HasForeignKey("keyResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Opgave4.Municipalities", "municipality")
                         .WithMany("societies")
                         .HasForeignKey("municipalityzipCode")
@@ -381,6 +452,8 @@ namespace Opgave4.Migrations
                         .IsRequired();
 
                     b.Navigation("address");
+
+                    b.Navigation("keyResponsible");
 
                     b.Navigation("municipality");
                 });

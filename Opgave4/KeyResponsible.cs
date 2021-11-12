@@ -12,7 +12,6 @@ namespace Opgave4
         public int keyResponsibleId { get; set; }
 
         public Persons person { get; set; }
-        public string cpr { get; set; }
 
         [MaxLength(8)]
         [MinLength(8)]
@@ -22,4 +21,4 @@ namespace Opgave4
         [MinLength(8)]
         public string licenseNumber { get; set; }
     }
-}
+}       

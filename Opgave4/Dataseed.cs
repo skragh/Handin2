@@ -99,14 +99,31 @@ namespace Opgave4
                 //    (8000, 'Aarhus C'),
                 //    (8660, 'Skanderborg');
 
+                // KeyResponsibles
+                var keyResponsible1 = new KeyResponsible { person = person1, phone = "59237402", licenseNumber = "68720935" };
+                var keyResponsible2 = new KeyResponsible { person = person2, phone = "12398043", licenseNumber = "24860212" };
+                var keyResponsible3 = new KeyResponsible { person = person3, phone = "50281234", licenseNumber = "02840302" };
+                var keyResponsible4 = new KeyResponsible { person = person4, phone = "10348564", licenseNumber = "65483024" };
+                var keyResponsible5 = new KeyResponsible { person = person5, phone = "35840238", licenseNumber = "08340218" };
+                var keyResponsible6 = new KeyResponsible { person = person6, phone = "39505830", licenseNumber = "27433493" };
+                var keyResponsible7 = new KeyResponsible { person = person7, phone = "38395494", licenseNumber = "54583292" };
+
+                context.keyResponsibles.Add(keyResponsible1);
+                context.keyResponsibles.Add(keyResponsible2);
+                context.keyResponsibles.Add(keyResponsible3);
+                context.keyResponsibles.Add(keyResponsible4);
+                context.keyResponsibles.Add(keyResponsible5);
+                context.keyResponsibles.Add(keyResponsible6);
+                context.keyResponsibles.Add(keyResponsible7);
+
                 //Societies
-                var society1 = new Societies { municipality = municipality1, activity = "Skydning", address = address12, cvr = "86732412", name = "OdderSkytteforening" };
-                var society2 = new Societies { activity = "Løb", name = "Odder Løbeklub", cvr = "73457219", address = address13, municipality = municipality1 };
-                var society3 = new Societies { activity = "Skydning", name = "Skanderborg Skytteforening", cvr = "87345851", address = address14, municipality = municipality3 };
-                var society4 = new Societies { activity = "Karate", name = "Skanderborg Shotokan Karate", cvr = "94652326", address = address15, municipality = municipality3 };
-                var society5 = new Societies { activity = "Skydning", name = "Aarhus Pistol Klub", cvr = "85234124", address = address16, municipality = municipality2 };
-                var society6 = new Societies { activity = "Skydning", name = "Skytteklubben DSB/AGF", cvr = "83623658", address = address17, municipality = municipality2 };
-                var society7 = new Societies { activity = "Computing", name = "Aarhus Software Society", cvr = "84516402", address = address17, municipality = municipality2 };
+                var society1 = new Societies { keyResponsible = keyResponsible1, municipality = municipality1, activity = "Skydning", address = address12, cvr = "86732412", name = "OdderSkytteforening" };
+                var society2 = new Societies { keyResponsible = keyResponsible2, activity = "Løb", name = "Odder Løbeklub", cvr = "73457219", address = address13, municipality = municipality1 };
+                var society3 = new Societies { keyResponsible = keyResponsible3, activity = "Skydning", name = "Skanderborg Skytteforening", cvr = "87345851", address = address14, municipality = municipality3 };
+                var society4 = new Societies { keyResponsible = keyResponsible4, activity = "Karate", name = "Skanderborg Shotokan Karate", cvr = "94652326", address = address15, municipality = municipality3 };
+                var society5 = new Societies { keyResponsible = keyResponsible5, activity = "Skydning", name = "Aarhus Pistol Klub", cvr = "85234124", address = address16, municipality = municipality2 };
+                var society6 = new Societies { keyResponsible = keyResponsible6, activity = "Skydning", name = "Skytteklubben DSB/AGF", cvr = "83623658", address = address17, municipality = municipality2 };
+                var society7 = new Societies { keyResponsible = keyResponsible7, activity = "Computing", name = "Aarhus Software Society", cvr = "84516402", address = address17, municipality = municipality2 };
 
                 municipality1.societies.Add(society1);
                 municipality1.societies.Add(society2);
@@ -144,14 +161,26 @@ namespace Opgave4
                 society6.memberships.Add(memberships[10]);
                 society7.memberships.Add(memberships[11]);
 
+                // AccessKeys
+                var accessKey1 = new AccessKey { keyAddress = address12, pinCode = "12345213" };
+                var accessKey2 = new AccessKey { keyAddress = address13, pinCode = "12456342" };
+                var accessKey3 = new AccessKey { keyAddress = address14, pinCode = "83209452" };
+                var accessKey4 = new AccessKey { keyAddress = address15, pinCode = "42538230" };
+                var accessKey5 = new AccessKey { keyAddress = address11, pinCode = "42590053" };
+
+                context.accessKeys.Add(accessKey1);
+                context.accessKeys.Add(accessKey2);
+                context.accessKeys.Add(accessKey3);
+                context.accessKeys.Add(accessKey4);
+                context.accessKeys.Add(accessKey5);
 
                 //Locations
                 List<Locations> locations = new List<Locations>();
-                locations.Add(new Locations { address = address12, description = "Spektrum", municipality = municipality1 });
-                locations.Add(new Locations { address = address13, description = "Morten Børup Skolen", municipality = municipality3 });
-                locations.Add(new Locations { address = address14, description = "Stilling Skole", municipality = municipality3 });
-                locations.Add(new Locations { address = address16, description = "Skytternes Hus", municipality = municipality2 });
-                locations.Add(new Locations { address = address18, description = "The GNU cave", municipality = municipality2 });
+                locations.Add(new Locations { address = address12, description = "Spektrum", municipality = municipality1, accessKey = accessKey1 });
+                locations.Add(new Locations { address = address13, description = "Morten Børup Skolen", municipality = municipality3, accessKey = accessKey2 });
+                locations.Add(new Locations { address = address14, description = "Stilling Skole", municipality = municipality3, accessKey = accessKey3 });
+                locations.Add(new Locations { address = address16, description = "Skytternes Hus", municipality = municipality2, accessKey = accessKey4 });
+                locations.Add(new Locations { address = address18, description = "The GNU cave", municipality = municipality2, accessKey = accessKey5 });
 
                 municipality1.locations.Add(locations[0]);
                 municipality3.locations.Add(locations[1]);
