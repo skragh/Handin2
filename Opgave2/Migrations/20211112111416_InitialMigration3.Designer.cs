@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Opgave2;
 
 namespace Opgave2.Migrations
 {
     [DbContext(typeof(MuncipalityDbContext))]
-    partial class MuncipalityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211112111416_InitialMigration3")]
+    partial class InitialMigration3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -18,7 +20,7 @@ namespace Opgave2.Migrations
 
             modelBuilder.Entity("Opgave2.Addresses", b =>
                 {
-                    b.Property<int>("addressId")
+                    b.Property<int>("AddressId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -34,7 +36,7 @@ namespace Opgave2.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("addressId");
+                    b.HasKey("AddressId");
 
                     b.ToTable("addresses");
                 });
@@ -45,7 +47,7 @@ namespace Opgave2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("addressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("description")
@@ -57,7 +59,7 @@ namespace Opgave2.Migrations
 
                     b.HasKey("locationId");
 
-                    b.HasIndex("addressId");
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("municipalityzipCode");
 
@@ -111,7 +113,7 @@ namespace Opgave2.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("addressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("name")
@@ -121,7 +123,7 @@ namespace Opgave2.Migrations
 
                     b.HasKey("cpr");
 
-                    b.HasIndex("addressId");
+                    b.HasIndex("AddressId");
 
                     b.ToTable("persons");
                 });
@@ -201,13 +203,13 @@ namespace Opgave2.Migrations
                         .HasMaxLength(8)
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("AddressId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("activity")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("addressId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<int>("municipalityzipCode")
                         .HasColumnType("INTEGER");
@@ -219,7 +221,7 @@ namespace Opgave2.Migrations
 
                     b.HasKey("cvr");
 
-                    b.HasIndex("addressId");
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("municipalityzipCode");
 
@@ -267,7 +269,7 @@ namespace Opgave2.Migrations
                 {
                     b.HasOne("Opgave2.Addresses", "address")
                         .WithMany()
-                        .HasForeignKey("addressId");
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("Opgave2.Municipalities", "municipality")
                         .WithMany("locations")
@@ -299,7 +301,7 @@ namespace Opgave2.Migrations
                 {
                     b.HasOne("Opgave2.Addresses", "address")
                         .WithMany()
-                        .HasForeignKey("addressId");
+                        .HasForeignKey("AddressId");
 
                     b.Navigation("address");
                 });
@@ -347,7 +349,7 @@ namespace Opgave2.Migrations
                 {
                     b.HasOne("Opgave2.Addresses", "address")
                         .WithMany()
-                        .HasForeignKey("addressId")
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

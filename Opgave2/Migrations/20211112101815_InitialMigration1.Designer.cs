@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Opgave2;
 
 namespace Opgave2.Migrations
 {
     [DbContext(typeof(MuncipalityDbContext))]
-    partial class MuncipalityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211112101815_InitialMigration1")]
+    partial class InitialMigration1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -18,7 +20,7 @@ namespace Opgave2.Migrations
 
             modelBuilder.Entity("Opgave2.Addresses", b =>
                 {
-                    b.Property<int>("addressId")
+                    b.Property<int>("AddressId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -34,7 +36,7 @@ namespace Opgave2.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("addressId");
+                    b.HasKey("AddressId");
 
                     b.ToTable("addresses");
                 });
@@ -45,7 +47,7 @@ namespace Opgave2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("addressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("description")
@@ -57,7 +59,7 @@ namespace Opgave2.Migrations
 
                     b.HasKey("locationId");
 
-                    b.HasIndex("addressId");
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("municipalityzipCode");
 
@@ -111,7 +113,7 @@ namespace Opgave2.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("addressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("name")
@@ -121,7 +123,7 @@ namespace Opgave2.Migrations
 
                     b.HasKey("cpr");
 
-                    b.HasIndex("addressId");
+                    b.HasIndex("AddressId");
 
                     b.ToTable("persons");
                 });
@@ -132,14 +134,19 @@ namespace Opgave2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("RoomBookingsroomBookingId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("description")
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("locationId")
+                    b.Property<int?>("locationId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("propertyId");
+
+                    b.HasIndex("RoomBookingsroomBookingId");
 
                     b.HasIndex("locationId");
 
@@ -201,13 +208,13 @@ namespace Opgave2.Migrations
                         .HasMaxLength(8)
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("activity")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("addressId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<int>("municipalityzipCode")
                         .HasColumnType("INTEGER");
@@ -219,7 +226,7 @@ namespace Opgave2.Migrations
 
                     b.HasKey("cvr");
 
-                    b.HasIndex("addressId");
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("municipalityzipCode");
 
@@ -248,26 +255,11 @@ namespace Opgave2.Migrations
                     b.ToTable("timespans");
                 });
 
-            modelBuilder.Entity("PropertiesRoomBookings", b =>
-                {
-                    b.Property<int>("propertiespropertyId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("roomBookingsroomBookingId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("propertiespropertyId", "roomBookingsroomBookingId");
-
-                    b.HasIndex("roomBookingsroomBookingId");
-
-                    b.ToTable("PropertiesRoomBookings");
-                });
-
             modelBuilder.Entity("Opgave2.Locations", b =>
                 {
                     b.HasOne("Opgave2.Addresses", "address")
                         .WithMany()
-                        .HasForeignKey("addressId");
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("Opgave2.Municipalities", "municipality")
                         .WithMany("locations")
@@ -299,18 +291,20 @@ namespace Opgave2.Migrations
                 {
                     b.HasOne("Opgave2.Addresses", "address")
                         .WithMany()
-                        .HasForeignKey("addressId");
+                        .HasForeignKey("AddressId");
 
                     b.Navigation("address");
                 });
 
             modelBuilder.Entity("Opgave2.Properties", b =>
                 {
-                    b.HasOne("Opgave2.Locations", "location")
+                    b.HasOne("Opgave2.RoomBookings", null)
                         .WithMany("properties")
-                        .HasForeignKey("locationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoomBookingsroomBookingId");
+
+                    b.HasOne("Opgave2.Locations", "location")
+                        .WithMany()
+                        .HasForeignKey("locationId");
 
                     b.Navigation("location");
                 });
@@ -335,7 +329,7 @@ namespace Opgave2.Migrations
             modelBuilder.Entity("Opgave2.Rooms", b =>
                 {
                     b.HasOne("Opgave2.Locations", "location")
-                        .WithMany("rooms")
+                        .WithMany()
                         .HasForeignKey("locationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -347,9 +341,7 @@ namespace Opgave2.Migrations
                 {
                     b.HasOne("Opgave2.Addresses", "address")
                         .WithMany()
-                        .HasForeignKey("addressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("Opgave2.Municipalities", "municipality")
                         .WithMany("societies")
@@ -371,33 +363,16 @@ namespace Opgave2.Migrations
                     b.Navigation("room");
                 });
 
-            modelBuilder.Entity("PropertiesRoomBookings", b =>
-                {
-                    b.HasOne("Opgave2.Properties", null)
-                        .WithMany()
-                        .HasForeignKey("propertiespropertyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Opgave2.RoomBookings", null)
-                        .WithMany()
-                        .HasForeignKey("roomBookingsroomBookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Opgave2.Locations", b =>
-                {
-                    b.Navigation("properties");
-
-                    b.Navigation("rooms");
-                });
-
             modelBuilder.Entity("Opgave2.Municipalities", b =>
                 {
                     b.Navigation("locations");
 
                     b.Navigation("societies");
+                });
+
+            modelBuilder.Entity("Opgave2.RoomBookings", b =>
+                {
+                    b.Navigation("properties");
                 });
 
             modelBuilder.Entity("Opgave2.Rooms", b =>

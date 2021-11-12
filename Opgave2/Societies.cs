@@ -23,6 +23,7 @@ namespace Opgave2
 
         [Required]
         public Addresses address { get; set; }
+        public int addressId { get; set; }
         [Required]
         public Municipalities municipality { get; set; }
         public ICollection<Memberships> memberships { get; set; }
@@ -31,7 +32,7 @@ namespace Opgave2
 
         public override string ToString()
         {
-            return $"[Societies] - CVR: {cvr}, Name: {name}, Activity: {activity}, Address {adress}, Municipality: {municipality.zipCode}";
+            return $"[Societies] - CVR: {cvr}, Name: {name}, Activity: {activity}, Address {address}, Municipality: {municipality.zipCode}";
         }
     }
 }

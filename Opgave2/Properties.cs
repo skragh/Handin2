@@ -15,8 +15,12 @@ namespace Opgave2
         [Required]
         public Locations location { get; set; }
 
+        public int locationId { get; set; }
+
         [MaxLength(100)]
         public string description { get; set; }
+
+        public ICollection<RoomBookings> roomBookings { get; set; }
 
         public override string ToString()
         {

@@ -22,7 +22,7 @@ namespace Opgave2
         public Addresses address { get; set; }
 
         public override string ToString() {
-            return $"[Persons] - CPR: {cpr}, Name: {name}, Address: {address.AddressId}";
+            return $"[Persons] - CPR: {cpr}, Name: {name}, Address: {address.addressId}";
         }
     }
 }

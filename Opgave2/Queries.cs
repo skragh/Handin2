@@ -22,7 +22,7 @@ namespace Opgave2
                                         where location.municipality.zipCode == zipCode
                                         join room in context.rooms
                                         on location.locationId equals room.location.locationId
-                                        select new { room }).ToList();
+                                        select room).ToList();
         }
 
         public ICollection<(Societies, Memberships, Addresses)> GetSocietiesByActivity(string activity)
@@ -34,7 +34,7 @@ namespace Opgave2
                  on society.cvr equals member.society.cvr
                  where member.isChairman
                  join address in context.addresses
-                 on society.adress equals address
+                 on society.address equals address
                  select new { society, member, address }).ToList();
         }
 
