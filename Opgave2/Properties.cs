@@ -15,7 +15,6 @@ namespace Opgave2
 
         [Required]
         public Locations location { get; set; }
-
         public int locationId { get; set; }
 
         [MaxLength(100)]
@@ -26,7 +25,7 @@ namespace Opgave2
 
         public override string ToString()
         {
-            return $"[Properties] - Id: {propertyId}, Location: {location.locationId}, Description: {description}";
+            return $"[Properties] - Id: {propertyId}, Location: {locationId}, Description: {description}";
         }
     }
 }

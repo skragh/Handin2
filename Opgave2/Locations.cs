@@ -27,7 +27,7 @@ namespace Opgave2
 
         public override string ToString()
         {
-            return $"[Locations] - Id: {locationId}, Municipality: {municipality}, Address: {address.ToString()}, Description: {description}";
+            return $"[Locations] - Id: {locationId}, Municipality: {municipality}, Address: {addressId}, Description: {description}";
         }
     }
 }

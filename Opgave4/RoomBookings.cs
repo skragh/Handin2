@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,19 +15,21 @@ namespace Opgave4
 
         [Required]
         public Societies societie { get; set; }
+        public string cvr { get; set; }
 
         [Required]
         public Timespans timespan { get; set; }
+        public int timespanId { get; set; }
 
         [Required]
-        public ICollection<Properties> properties { get; set; }
+        public List<Properties> properties { get; set; } = new List<Properties>();
 
         [MaxLength(100)]
         public string description { get; set; }
 
         public override string ToString()
         {
-            return $"[RoomBookings] - Id: {roomBookingId}, Society: {societie.cvr}, Timespan: {timespan.timespanId}, Description: {description}";
+            return $"[RoomBookings] - Id: {roomBookingId}, Society: {cvr}, Timespan: {timespanId}, Description: {description}";
         }
     }
 }

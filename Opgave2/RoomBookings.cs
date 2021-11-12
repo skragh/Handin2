@@ -29,7 +29,7 @@ namespace Opgave2
 
         public override string ToString()
         {
-            return $"[RoomBookings] - Id: {roomBookingId}, Society: {societie.cvr}, Timespan: {timespan.timespanId}, Description: {description}";
+            return $"[RoomBookings] - Id: {roomBookingId}, Society: {cvr}, Timespan: {timespanId}, Description: {description}";
         }
     }
 }

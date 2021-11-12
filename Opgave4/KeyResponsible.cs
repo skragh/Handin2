@@ -10,8 +10,9 @@ namespace Opgave4
     {
         [Key]
         public int keyResponsibleId { get; set; }
-        
+
         public Persons person { get; set; }
+        public string cpr { get; set; }
 
         [MaxLength(8)]
         [MinLength(8)]

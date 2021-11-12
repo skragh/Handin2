@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Opgave4
 {
@@ -10,6 +11,7 @@ namespace Opgave4
     {
         [Key]
         public int roomId { get; set; }
+
         [Required]
         public Locations location { get; set; }
         public int locationId { get; set; }
@@ -19,10 +21,11 @@ namespace Opgave4
 
         public int capacity { get; set; }
 
-        public ICollection<Timespans> timespans { get; set; }
+        public List<Timespans> timespans { get; } = new List<Timespans>();
 
-        public override string ToString() {
-            return $"[Rooms] - Id: {roomId}, Location: {location.locationId}, Name: {name}, Capacity: {capacity}";
+        public override string ToString()
+        {
+            return $"[Rooms] - Id: {roomId}, Location: {locationId}, Name: {name}, Capacity: {capacity}";
         }
     }
 }

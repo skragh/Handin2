@@ -22,10 +22,11 @@ namespace Opgave2
 
         [Required]
         public Addresses address { get; set; }
+        public int addressId { get; set; }
 
         public override string ToString()
         {
-            return $"[Persons] - CPR: {cpr}, Name: {name}, Address: {address.addressId}";
+            return $"[Persons] - CPR: {cpr}, Name: {name}, Address: {addressId}";
         }
     }
 }

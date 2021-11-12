@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Opgave4
 {
@@ -18,10 +19,11 @@ namespace Opgave4
         public DateTime closingTime { get; set; }
 
         public Rooms room { get; set; }
+        public int roomId { get; set; }
 
         public override string ToString()
         {
-            return $"[Timespans] - Id: {timespanId}, OpeningTime: {openingTime.ToString()}, ClosingTime: {closingTime.ToString()}, Room: {room.roomId}";
+            return $"[Timespans] - Id: {timespanId}, OpeningTime: {openingTime.ToString()}, ClosingTime: {closingTime.ToString()}, Room: {roomId}";
         }
     }
 }

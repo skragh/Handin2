@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,9 @@ namespace Opgave4
         [MaxLength(100)]
         public string name { get; set; }
 
-        public ICollection<Locations> locations { get; set; }
+        public List<Locations> locations { get; } = new List<Locations>();
 
-        public ICollection<Societies> societies { get; set; }
+        public List<Societies> societies { get; } = new List<Societies>();
 
         public override string ToString()
         {

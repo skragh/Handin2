@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace Opgave4
         [Key]
         [Required]
         [MaxLength(11)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string cpr { get; set; }
 
         [Required]
@@ -20,9 +22,11 @@ namespace Opgave4
 
         [Required]
         public Addresses address { get; set; }
+        public int addressId { get; set; }
 
-        public override string ToString() {
-            return $"[Persons] - CPR: {cpr}, Name: {name}, Address: {address.AddressId}";
+        public override string ToString()
+        {
+            return $"[Persons] - CPR: {cpr}, Name: {name}, Address: {addressId}";
         }
     }
 }

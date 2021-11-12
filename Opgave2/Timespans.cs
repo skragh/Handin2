@@ -18,12 +18,12 @@ namespace Opgave2
         [DataType(DataType.DateTime)]
         public DateTime closingTime { get; set; }
 
-        //[ForeignKey("Rooms")]
         public Rooms room { get; set; }
+        public int roomId { get; set; }
 
         public override string ToString()
         {
-            return $"[Timespans] - Id: {timespanId}, OpeningTime: {openingTime.ToString()}, ClosingTime: {closingTime.ToString()}, Room: {room.roomId}";
+            return $"[Timespans] - Id: {timespanId}, OpeningTime: {openingTime.ToString()}, ClosingTime: {closingTime.ToString()}, Room: {roomId}";
         }
     }
 }
