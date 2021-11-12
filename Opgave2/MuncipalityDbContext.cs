@@ -13,5 +13,16 @@ namespace Opgave2
         {
             optionsBuilder.UseSqlite("DataSource=app.db;Cache=Shared");
         }
+
+        public DbSet<Addresses> addresses;
+        public DbSet<Locations> locations;
+        public DbSet<Memberships> memberships;
+        public DbSet<Municipalities> municipalities;
+        public DbSet<Persons> persons;
+        public DbSet<Properties> properties;
+        public DbSet<RoomBookings> roomBookings;
+        public DbSet<Rooms> rooms;
+        public DbSet<Societies> societies;
+        public DbSet<Timespans> timespans;
     }
 }

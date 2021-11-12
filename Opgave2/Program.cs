@@ -6,7 +6,14 @@ namespace Opgave2
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var context = new MuncipalityDbContext();
+            Dataseed data = new Dataseed();
+            data.SeedData();
+
+            var test = context.addresses.Find(1);
+
+            Console.WriteLine($"{test.street}");
+
         }
     }
 }
