@@ -26,6 +26,7 @@ namespace Opgave4
                 Console.WriteLine("[1] Query all Rooms in 8300, Odder.");
                 Console.WriteLine("[2] Query all Societies with Activity = \"Skydning\".");
                 Console.WriteLine("[3] Query all Rooms booked.");
+                Console.WriteLine("[4] Query all Future Bookings with KeyResponsible #1.");
                 Console.WriteLine("[0] Quit the program.");
 
                 Console.Write(">");
@@ -39,10 +40,14 @@ namespace Opgave4
                                        where location.municipality.zipCode == zipCode
                                        join room in context.rooms
                                        on location.locationId equals room.location.locationId
-                                       select room;
+                                       join address in context.addresses
+                                       on location.address equals address
+                                       select new { room = room, address = address };
                     if (roomsInOdder != null)
-                        foreach (var room in roomsInOdder)
-                            Console.WriteLine($"{room}");
+                        foreach (var obj in roomsInOdder)
+                            Console.WriteLine($"{obj.room}, {obj.address}");
+                    else
+                        Console.WriteLine("No results found.");
                 }
                 else if (input == "2")
                 {
@@ -61,6 +66,8 @@ namespace Opgave4
                     if (allSocieties != null)
                         foreach (var obj in allSocieties)
                             Console.WriteLine($"{obj.society}, {obj.member}, {obj.address}");
+                    else
+                        Console.WriteLine("No results found.");
                 }
                 else if (input == "3")
                 {
@@ -79,13 +86,36 @@ namespace Opgave4
                     if (allRoomsBooked != null)
                         foreach (var obj in allRoomsBooked)
                             Console.WriteLine($"{obj.room}, {obj.location}, {obj.person}, {obj.timespan}");
+                    else
+                        Console.WriteLine("No results found.");
+                }
+                else if (input == "4")
+                {
+                    Console.WriteLine("\n--- All Future bookings with KeyResponsible #1 ---\n");
+                    int chosenKeyResponsible = 1;
+                    var allFutureBookings = from keyResponsible in context.keyResponsibles
+                                            where keyResponsible.keyResponsibleId == chosenKeyResponsible
+                                            join society in context.societies
+                                            on keyResponsible equals society.keyResponsible
+                                            join booking in context.roomBookings
+                                            on society equals booking.societie
+                                            join accessKey in context.accessKeys
+                                            on booking.timespan.room.location.accessKey equals accessKey
+                                            select new { booking = booking, accessKey = accessKey };
+
+                    if (allFutureBookings != null)
+                        foreach (var obj in allFutureBookings)
+                            Console.WriteLine($"{obj.booking}, {obj.accessKey}");
+                    else
+                        Console.WriteLine("No results found.");
                 }
                 else if (input == "0")
                     break;
 
                 Console.WriteLine();
             }
-            Console.WriteLine("Program terminated.");
+
+            Console.WriteLine("\nProgram terminated.");
         }
     }
 }

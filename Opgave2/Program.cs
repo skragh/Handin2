@@ -39,10 +39,14 @@ namespace Opgave2
                                        where location.municipality.zipCode == zipCode
                                        join room in context.rooms
                                        on location.locationId equals room.location.locationId
-                                       select room;
+                                       join address in context.addresses
+                                       on location.address equals address
+                                       select new { room = room, address = address };
                     if (roomsInOdder != null)
-                        foreach (var room in roomsInOdder)
-                            Console.WriteLine($"{room}");
+                        foreach (var obj in roomsInOdder)
+                            Console.WriteLine($"{obj.room}, {obj.address}");
+                    else
+                        Console.WriteLine("No results found.");
                 }
                 else if (input == "2")
                 {
@@ -61,6 +65,8 @@ namespace Opgave2
                     if (allSocieties != null)
                         foreach (var obj in allSocieties)
                             Console.WriteLine($"{obj.society}, {obj.member}, {obj.address}");
+                    else
+                        Console.WriteLine("No results found.");
                 }
                 else if (input == "3")
                 {
@@ -79,13 +85,16 @@ namespace Opgave2
                     if (allRoomsBooked != null)
                         foreach (var obj in allRoomsBooked)
                             Console.WriteLine($"{obj.room}, {obj.location}, {obj.person}, {obj.timespan}");
+                    else
+                        Console.WriteLine("No results found.");
                 }
                 else if (input == "0")
                     break;
 
                 Console.WriteLine();
             }
-            Console.WriteLine("Program terminated.");
+
+            Console.WriteLine("\nProgram terminated.");
         }
     }
 }
