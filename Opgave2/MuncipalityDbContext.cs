@@ -11,7 +11,7 @@ namespace Opgave2
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("DataSource=app.db;Cache=Shared");
+            optionsBuilder.UseSqlServer("DataSource=app.db;Cache=Shared");
         }
 
         public DbSet<Addresses> addresses { get; set; }
