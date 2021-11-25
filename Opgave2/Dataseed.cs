@@ -13,7 +13,7 @@ namespace Opgave2
         {
             using (var context = new MuncipalityDbContext())
             {
-                context.Database.EnsureCreated();
+                //context.Database.EnsureCreated();
 
                 if (!context.addresses.Any())
                 {
@@ -135,6 +135,7 @@ namespace Opgave2
                     memberships.Add(new Memberships { isChairman = false, society = society6, person = person2 });
                     memberships.Add(new Memberships { isChairman = true, society = society7, person = person3 });
 
+                    
                     society1.memberships.Add(memberships[0]);
                     society1.memberships.Add(memberships[1]);
                     society2.memberships.Add(memberships[2]);
@@ -147,7 +148,7 @@ namespace Opgave2
                     society6.memberships.Add(memberships[9]);
                     society6.memberships.Add(memberships[10]);
                     society7.memberships.Add(memberships[11]);
-
+                    
 
                     //Locations
                     List<Locations> locations = new List<Locations>();

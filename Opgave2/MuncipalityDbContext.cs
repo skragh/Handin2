@@ -11,7 +11,20 @@ namespace Opgave2
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("DataSource=app.db;Cache=Shared");
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelbuilder)
+        {
+            modelbuilder.Entity<Municipalities>()
+                .Property(m => m.zipCode).ValueGeneratedNever();
+
+            foreach (var relationship in modelbuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+
+            base.OnModelCreating(modelbuilder);
         }
 
         public DbSet<Addresses> addresses { get; set; }

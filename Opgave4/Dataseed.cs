@@ -12,6 +12,7 @@ namespace Opgave4
         {
             using (var context = new MuncipalityDbContext())
             {
+
                 context.Database.EnsureCreated();
                 //addresses
                 var address1 = new Addresses { number = 1, postalCode = 8000, street = "Finlandsgade" };

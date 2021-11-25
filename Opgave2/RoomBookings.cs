@@ -19,7 +19,7 @@ namespace Opgave2
 
         [Required]
         public Timespans timespan { get; set; }
-        public int timespanId { get; set; }
+        public int? timespanId { get; set; }
 
         [Required]
         public List<Properties> properties { get; set; } = new List<Properties>();

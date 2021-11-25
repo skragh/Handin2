@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Opgave4;
 
 namespace Opgave4.Migrations
 {
     [DbContext(typeof(MuncipalityDbContext))]
-    partial class MuncipalityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211125080605_Opgave4")]
+    partial class Opgave4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

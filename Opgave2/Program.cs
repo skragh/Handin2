@@ -8,14 +8,11 @@ namespace Opgave2
     {
         static void Main(string[] args)
         {
-            if (File.Exists("app.db"))
-            {
-                File.Delete("app.db");
-            }
 
             var context = new MuncipalityDbContext();
             Dataseed data = new Dataseed();
-            data.SeedData();
+            if (!context.addresses.Any())
+                data.SeedData();
 
             string input = "";
 
